@@ -31,6 +31,11 @@ steps:
     backendAzureRmContainerName: 'tfstatedevops'
     backendAzureRmKey: 'terraform.tfstate'
 - task: TerraformTaskV2@2
+  env:
+    ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+    ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+    ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+    ARM_TENANT_ID: $(ARM_TENANT_ID)
   inputs:
     provider: 'azurerm'
     command: 'plan'
