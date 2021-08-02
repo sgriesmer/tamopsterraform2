@@ -30,6 +30,7 @@ steps:
     backendAzureRmStorageAccountName: 'tamopstf2121'
     backendAzureRmContainerName: 'tfstatedevops'
     backendAzureRmKey: 'terraform.tfstate'
+    workingDirectory: './terraform'
 - task: TerraformTaskV2@2
   env:
     ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
@@ -40,6 +41,7 @@ steps:
     provider: 'azurerm'
     command: 'plan'
     environmentServiceNameAzureRM: 'tamopstf'
+    workingDirectory: './terraform'
 - task: TerraformTaskV2@2
   env:
     ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
@@ -50,3 +52,4 @@ steps:
     provider: 'azurerm'
     command: 'apply'
     environmentServiceNameAzureRM: 'tamopstf'
+    workingDirectory: './terraform'
