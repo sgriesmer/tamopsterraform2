@@ -61,16 +61,17 @@ steps:
     command: 'apply'
     environmentServiceNameAzureRM: 'tamopstf'
 
-jobs:  
-- deployment: VMDeploy
-  displayName: web
-  environment:
-    name:  test
-    resourceType: VirtualMachine
-    tags: myVM
-  strategy:
-   runOnce:
-     deploy:
-       steps:
-         - script: echo my first deployment
+-stage:
+  jobs:  
+  - deployment: VMDeploy
+    displayName: web
+    environment:
+      name:  test
+      resourceType: VirtualMachine
+      tags: myVM
+    strategy:
+    runOnce:
+      deploy:
+        steps:
+          - script: echo my first deployment
   
