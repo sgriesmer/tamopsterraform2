@@ -59,7 +59,7 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
 
     admin_ssh_key {
         username       = "azureuser"
-        public_key     = file("../az_sjg.pub")
+        public_key     = file("./az_sjg.pub")
     }
     
     boot_diagnostics {
