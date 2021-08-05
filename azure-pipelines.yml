@@ -60,18 +60,3 @@ steps:
     provider: 'azurerm'
     command: 'apply'
     environmentServiceNameAzureRM: 'tamopstf'
-
--stage:
-  jobs:  
-  - deployment: VMDeploy
-    displayName: web
-    environment:
-      name:  test
-      resourceType: VirtualMachine
-      tags: myVM
-    strategy:
-    runOnce:
-      deploy:
-        steps:
-          - script: echo my first deployment
-  
