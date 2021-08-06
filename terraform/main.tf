@@ -85,7 +85,7 @@ resource "azurerm_linux_virtual_machine" "test" {
   network_interface_ids = [azurerm_network_interface.test.id]
   admin_ssh_key {
     username   = "adminsjg"
-    public_key = file('./az_sjg.pub')
+    public_key = file("./az_sjg.pub")
   }
   os_disk {
     caching           = "ReadWrite"
