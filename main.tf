@@ -55,12 +55,13 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
     
     computer_name  = "myvm"
     admin_username = "azureuser"
-    disable_password_authentication = true
+    admin_password = "Try1t^now"
+    disable_password_authentication = false
 
-    admin_ssh_key {
-        username       = "azureuser"
-        public_key     = file("./az_sjg.pub")
-    }
+  #  admin_ssh_key {
+  #      username       = "azureuser"
+  #      public_key     = file("./az_sjg.pub")
+  #  }
     
     boot_diagnostics {
         storage_account_uri = azurerm_storage_account.mystorageaccount.primary_blob_endpoint
