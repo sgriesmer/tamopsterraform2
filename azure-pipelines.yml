@@ -36,9 +36,9 @@ steps:
     provider: 'azurerm'
     command: 'init'
     backendServiceArm: 'tamopstf'
-    backendAzureRmResourceGroupName: 'tamopstf'
-    backendAzureRmStorageAccountName: 'tamopstf2121'
-    backendAzureRmContainerName: 'tfstatedevops'
+    backendAzureRmResourceGroupName: 'tstate'
+    backendAzureRmStorageAccountName: 'tstate21911'
+    backendAzureRmContainerName: 'tstate'
     backendAzureRmKey: 'terraform.tfstate'
     workingDirectory: 'terraform'
 - task: TerraformTaskV2@2
