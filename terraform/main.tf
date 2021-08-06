@@ -73,7 +73,7 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
 
 resource "random_id" "randomId" {
     keepers = {
-        # Generate a new ID only when a new resource group is defined   
+        # Generate a new ID only when a new resource group (rg) is defined   
         resource_group = azurerm_resource_group.myterraformgroup.name
     }
 
