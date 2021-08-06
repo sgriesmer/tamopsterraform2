@@ -62,3 +62,4 @@ steps:
     provider: 'azurerm'
     command: 'apply'
     environmentServiceNameAzureRM: 'tamopstf'
+    workingDirectory: 'terraform'
