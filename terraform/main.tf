@@ -81,12 +81,13 @@ resource "azurerm_linux_virtual_machine" "test" {
   resource_group_name = "${var.resource_group}"
   size                = "Standard_B1s"
   admin_username      = "adminsjg"
-  disable_password_authentication = true
+  admin_password      = "Try1t^now"
+  disable_password_authentication = false
   network_interface_ids = [azurerm_network_interface.test.id]
-  admin_ssh_key {
-    username   = "adminsjg"
-    public_key = "file('./az_sjg.pub')"
-  }
+#  admin_ssh_key {
+#    username   = "adminsjg"
+#    public_key = "file('./az_sjg.pub')"
+#  }
   os_disk {
     caching           = "ReadWrite"
     storage_account_type = "Standard_LRS"
