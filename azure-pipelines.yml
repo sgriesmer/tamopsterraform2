@@ -60,6 +60,24 @@ stages:
         environmentServiceNameAzureRM: 'tamopstf'
         workingDirectory: 'terraform'
 
+- stage: Deploy
+  jobs:
+  - deployment: FakeRestAPI
+    pool:
+      vmImage: 'Ubuntu-16.04'
+    environment: 'TEST'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureWebApp@1
+            displayName: 'Deploy Azure Web App'
+            inputs:
+              azureSubscription: ''
+              appName: ''
+              appType: webApp
+              package: automatedtesting/jmeter/fakerestapi.zip
+
 - stage: Destroy
   jobs:
   - job: Destroy
