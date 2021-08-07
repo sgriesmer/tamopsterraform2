@@ -60,6 +60,8 @@ stages:
         environmentServiceNameAzureRM: 'tamopstf'
         workingDirectory: 'terraform'
 
+- stage: Destroy
+  jobs:
   - job: Destroy
     pool:
       name: Hosted Ubuntu 1604
