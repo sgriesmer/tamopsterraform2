@@ -60,15 +60,6 @@ stages:
         environmentServiceNameAzureRM: 'tamopstf'
         workingDirectory: 'terraform'
 
-# Delay further execution of a workflow by 5 minutes
-
-  - job: RunsOnServer
-    pool: Server
-    steps:
-    - task: Delay@1
-      inputs:
-        delayForMinutes: '5' 
-
   - job: Destroy
     pool:
       name: Hosted Ubuntu 1604
