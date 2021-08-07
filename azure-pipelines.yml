@@ -67,7 +67,7 @@ stages:
     steps:
     - task: Delay@1
       inputs:
-        #delayForMinutes: '1' 
+        delayForMinutes: '5' 
     - task: TerraformTaskV2@2
       env:
         ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
