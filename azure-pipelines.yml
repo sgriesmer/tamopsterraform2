@@ -59,3 +59,23 @@ stages:
         command: 'apply'
         environmentServiceNameAzureRM: 'tamopstf'
         workingDirectory: 'terraform'
+
+# Delay further execution of a workflow by 5 minutes
+jobs:
+- job: RunsOnServer
+  pool: Server
+  steps:
+  - task: Delay@1
+    inputs:
+      #delayForMinutes: '1' 
+  - task: TerraformTaskV2@2
+    env:
+      ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+      ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+      ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+      ARM_TENANT_ID: $(ARM_TENANT_ID)
+    inputs:
+      provider: 'azurerm'
+      command: 'destroy'
+      environmentServiceNameAzureRM: 'tamopstf'
+      workingDirectory: 'terraform'
