@@ -73,10 +73,10 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
-              azureSubscription: ''
-              appName: ''
+              azureSubscription: $(ARM_SUBSCRIPTION_ID)
+              appName: 'webapp-AppService'
               appType: webApp
-              package: automatedtesting/jmeter/fakerestapi.zip
+              package: 'automatedtesting/jmeter/fakerestapi.zip'
 
 - stage: Destroy
   jobs:
