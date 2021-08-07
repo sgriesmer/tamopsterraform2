@@ -73,6 +73,29 @@ stages:
     pool:
       name: Hosted Ubuntu 1604
     steps:
+    - task: InstallSSHKey@0
+      inputs:
+        knownHostsEntry: 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
+        sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDM+zJHMM8CGFxAw65g0W0/gg1bkCtAQgREVtXV8lclanDVSgDDSfmDKXtPeL+ZvOx8j/AHudKNtGvRnucDb0qatMdU/HRGiw66KhGsNe1jqsHIVD8T9qOBvMGKpQwSS9GOoAI0BVGdAxDuxOlnp6E7MbB5d7TVcTapAgberY0PxQ38gpQdA43kStR14E13icbpCTbLNlqXXOBQouS56BTwW21oYCrKRl98q0auvdBzWww/xFGms7jorzjOGVqNj8fawA21G6X1zhLGeE5yuMTZYllucHy97Fq7Ep7ADpWK1EG96/a3wVikc0byW/YZXK1bZqa+ZF7qPN4Yv8uxIob9 stephen@cc-0f53-c91c10a4-7494f6474d-p9tgb'
+        sshKeySecureFile: 'az_sjg'
+    - task: TerraformInstaller@0
+      inputs:
+        terraformVersion: '1.0.2'
+    - task: TerraformTaskV2@2
+      env:
+        ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+        ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+        ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+        ARM_TENANT_ID: $(ARM_TENANT_ID)
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        backendServiceArm: 'tamopstf'
+        backendAzureRmResourceGroupName: 'tstate'
+        backendAzureRmStorageAccountName: 'tstate21911'
+        backendAzureRmContainerName: 'tstate'
+        backendAzureRmKey: 'terraform.tfstate'
+        workingDirectory: 'terraform'
     - task: TerraformTaskV2@2
       env:
         ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
