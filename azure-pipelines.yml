@@ -59,6 +59,11 @@ stages:
         command: 'apply'
         environmentServiceNameAzureRM: 'tamopstf'
         workingDirectory: 'terraform'
+    - task: AzureWebApp@1
+      inputs:
+        azureSubscription: $(ARM_SUBSCRIPTION_ID)
+        appName: sjg-udacity-newapp7-AppService
+        package: 'automatedtesting/jmeter/fakerestapi.zip'
 
 #- stage: Deploy
 #  jobs:
