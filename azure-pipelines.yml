@@ -97,8 +97,6 @@ stages:
         workingDirectory: 'automatedtesting/postman'
   - deployment: VMDeploy
     displayName: deploy selenium test environment on VM
-    environment:
-      resourceName: sjg-udacity-vm
     strategy:
       runOnce:
        deploy:
