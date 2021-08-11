@@ -98,7 +98,6 @@ stages:
   - deployment: VMDeploy
     displayName: deploy selenium test environment on VM
     environment:
-      name: test
       resourceType: VirtualMachine
     strategy:
      runOnce:
