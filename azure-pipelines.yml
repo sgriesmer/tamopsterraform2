@@ -80,7 +80,8 @@ stages:
       displayName: run newman
       inputs:
         script: |
-          newman run ../automatedtesting/postman/regression-test.postman_collection_sjg
+          newman run regression-test.postman_collection_sjg
+        workingDirectory: 'automatedtesting/postman'
     
 - stage: Destroy
   jobs:
