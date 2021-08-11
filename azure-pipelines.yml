@@ -99,7 +99,8 @@ stages:
     displayName: deploy selenium test environment on VM
     environment:
       resourceName: sjg-udacity-vm
-     runOnce:
+    strategy:
+      runOnce:
        deploy:
          steps:
          - task: Bash@3
