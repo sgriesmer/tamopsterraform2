@@ -97,6 +97,9 @@ stages:
         workingDirectory: 'automatedtesting/postman'
   - deployment: VMDeploy
     displayName: deploy selenium test environment on VM
+    environment:
+      name: "Test"
+      resourceType: VirtualMachine
     strategy:
       runOnce:
        deploy:
