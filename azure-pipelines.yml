@@ -59,14 +59,14 @@ stages:
         command: 'apply'
         environmentServiceNameAzureRM: 'tamopstf'
         workingDirectory: 'terraform'
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'tamopstf'
-    appType: 'webAppLinux'
-    WebAppName: 'sjg-udacity-newapp7-AppService'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/fakerestapi.zip'
-    RuntimeStack: 'DOTNETCORE|3.1'
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'tamopstf'
+        appType: 'webAppLinux'
+        WebAppName: 'sjg-udacity-newapp7-AppService'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/fakerestapi.zip'
+        RuntimeStack: 'DOTNETCORE|3.1'
 
 - stage: Testing
   jobs:
