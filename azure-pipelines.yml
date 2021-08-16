@@ -67,6 +67,21 @@ stages:
         WebAppName: 'sjg-udacity-newapp7-AppService'
         packageForLinux: '$(System.DefaultWorkingDirectory)/fakerestapi.zip'
 
+- stage: deploy
+  jobs:
+  - deployment: VMDeploy
+    displayName: web
+    pool:
+      vmImage: 'Ubuntu-18.04'
+    environment:
+      name: TEST
+      resourceType: VirtualMachine
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo my first deployment
+
 - stage: Testing
   jobs:
   - job: Testing
