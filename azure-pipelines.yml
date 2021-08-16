@@ -125,12 +125,16 @@ stages:
              script: |
                #! /bin/bash
 
-               sudo apt-get upgrade -y
+               sudo apt-get install software-properties-common -y
+               sudo apt-add-repository universe -y
+               sudo apt-get update -y
                sudo apt-get install python3-pip -y
                sudo apt-get install unzip -y
-               sudo apt-get install -y chromium-browser
+               sudo apt-get install chromium-browser -y
+               sudo apt-get install chromium-driver -y
+               python3 -m pip install --upgrade pip
                pip3 install selenium
-               export PATH=$PATH:/opt/WebDriver/bin 
+               
     
 - stage: Destroy
   jobs:
