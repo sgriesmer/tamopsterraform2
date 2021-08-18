@@ -79,7 +79,7 @@ resource "azurerm_linux_virtual_machine" "test" {
   name                = "sjg-udacity-vm"
   location            = "${var.location}"
   resource_group_name = "${var.resource_group}"
-  size                = "Standard_B1s"
+  size                = "Standard_B1ms"
   admin_username      = "adminsjg"
   disable_password_authentication = true
   network_interface_ids = [azurerm_network_interface.test.id]
