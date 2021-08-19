@@ -66,6 +66,18 @@ stages:
         appType: 'webAppLinux'
         WebAppName: 'sjg-udacity-newapp7-AppService'
         packageForLinux: '$(System.DefaultWorkingDirectory)/fakerestapi.zip'
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/selenium'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Pipeline.Workspace)/selenium.zip'
+        replaceExistingArchive: true
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)/selenium.zip'
+        artifact: 'selenium'
+        publishLocation: 'pipeline'
 
 - stage: deploy
   jobs:
