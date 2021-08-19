@@ -148,8 +148,9 @@ stages:
                sudo apt-get install chromium-driver -y
                python3 -m pip install --upgrade pip
                pip3 install selenium
-               unzip $(Pipeline.Workspace)/selenium.zip
-               ls -l
+               echo "Contents of Pipeline Workspace"
+               ls -l $(Pipeline.Workspace)
+        
          - task: Bash@3
            inputs:
              targetType: 'inline'
