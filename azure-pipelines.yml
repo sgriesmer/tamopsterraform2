@@ -146,7 +146,11 @@ stages:
                wget http://apache.volia.net//jmeter/binaries/apache-jmeter-5.4.tgz
                tar -xf apache-jmeter-5.4.tgz
                ./apache-jmeter-5.4/bin/jmeter -v
-    
+               echo "Working Directory:"
+               ls -l $(System.DefaultWorkingDirectory)
+               echo "Pipeline Workspace:"
+               ls -l $(Pipeline.Workspace)
+            
 - stage: Destroy
   jobs:
   - job: Destroy
