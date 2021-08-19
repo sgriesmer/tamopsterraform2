@@ -80,7 +80,7 @@ stages:
       runOnce:
         deploy:
           steps:
-          - script: echo my first deployment
+          - script: mkdir test; hostname; uname -a
 
 - stage: Testing
   jobs:
@@ -125,6 +125,8 @@ stages:
              script: |
                #! /bin/bash
 
+               hostname
+               uname -a
                sudo apt-get install software-properties-common -y
                sudo apt-add-repository universe -y
                sudo apt-get update -y
