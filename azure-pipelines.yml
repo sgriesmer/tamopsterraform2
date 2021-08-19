@@ -150,6 +150,8 @@ stages:
                pip3 install selenium
                echo "Contents of Pipeline Workspace"
                ls -l $(Pipeline.Workspace)
+               unzip -o $(Pipeline.Workspace)/selenium/selenium.zip
+               ls -l
         
          - task: Bash@3
            inputs:
