@@ -164,7 +164,7 @@ stages:
                ls -l $(Pipeline.Workspace)
                unzip -o $(Pipeline.Workspace)/selenium/selenium.zip
                ls -l
-               python3 login.py
+#               python3 login.py
         
          - task: Bash@3
            inputs:
