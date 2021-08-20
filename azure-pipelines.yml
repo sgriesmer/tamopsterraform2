@@ -94,7 +94,7 @@ stages:
 - stage: deploy
   jobs:
   - deployment: VMDeploy
-    displayName: web
+    displayName: VM Deploy
     pool:
       vmImage: 'Ubuntu-18.04'
     environment:
@@ -135,7 +135,7 @@ stages:
 #          newman run data-validation-test.postman_collection_sjg
         workingDirectory: 'automatedtesting/postman'
   - deployment: VMDeploy
-    displayName: deploy selenium and jmeter test environment on VM
+    displayName: run selenium and jmeter tests
     environment:
       name: "TEST"
       resourceType: VirtualMachine
@@ -181,7 +181,10 @@ stages:
                echo "Pipeline Workspace:"
                ls -l $(Pipeline.Workspace)
                unzip -o $(Pipeline.Workspace)/jmeter/jmeter.zip
-               ./apache-jmeter-5.4/bin/jmeter -n -t Starter.jmx
+               echo "Stress Test"
+               ./apache-jmeter-5.4/bin/jmeter -n -t stress-test.jmx
+               echo "Endurance Test"
+               ./apache-jmeter-5.4/bin/jmeter -n -t endurance-test.jmx
             
 - stage: Destroy
   jobs:
