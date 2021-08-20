@@ -78,6 +78,18 @@ stages:
         targetPath: '$(Pipeline.Workspace)/selenium.zip'
         artifact: 'selenium'
         publishLocation: 'pipeline'
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Pipeline.Workspace)/jmeter.zip'
+        replaceExistingArchive: true
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)/jmeter.zip'
+        artifact: 'jmeter'
+        publishLocation: 'pipeline'
 
 - stage: deploy
   jobs:
@@ -168,6 +180,8 @@ stages:
                ls -l $(System.DefaultWorkingDirectory)
                echo "Pipeline Workspace:"
                ls -l $(Pipeline.Workspace)
+               unzip -o $(Pipeline.Workspace)/jmeter/jmeter.zip
+               ./apache-jmeter-5.4/bin/jmeter Starter.jmx
             
 - stage: Destroy
   jobs:
