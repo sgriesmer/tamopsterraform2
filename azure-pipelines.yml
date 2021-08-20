@@ -181,7 +181,7 @@ stages:
                echo "Pipeline Workspace:"
                ls -l $(Pipeline.Workspace)
                unzip -o $(Pipeline.Workspace)/jmeter/jmeter.zip
-               ./apache-jmeter-5.4/bin/jmeter Starter.jmx
+               ./apache-jmeter-5.4/bin/jmeter -n -t Starter.jmx
             
 - stage: Destroy
   jobs:
