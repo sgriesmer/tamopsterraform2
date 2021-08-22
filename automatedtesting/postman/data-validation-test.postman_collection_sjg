@@ -6,7 +6,49 @@
 	},
 	"item": [
 		{
-			"name": "Check Employee 1 is Tiger Nixon",
+			"name": "Check Employee 8440  is Tiger Nixon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful response\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"success\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employees?id=8440",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employees"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "8440"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Employee 1 is Age 61",
 			"event": [
 				{
 					"listen": "test",
