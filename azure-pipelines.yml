@@ -193,9 +193,9 @@ stages:
                ls -l $(Pipeline.Workspace)
                unzip -o $(Pipeline.Workspace)/jmeter/jmeter.zip
                echo "Stress Test"
-               ./apache-jmeter-5.4/bin/jmeter -n -t stress-test.jmx
+               ./apache-jmeter-5.4/bin/jmeter -n -t stress-test-plan.jmx
                echo "Endurance Test"
-               ./apache-jmeter-5.4/bin/jmeter -n -t endurance-test.jmx
+               ./apache-jmeter-5.4/bin/jmeter -n -t endurance-test-plan.jmx
             
 - stage: Destroy
   jobs:
