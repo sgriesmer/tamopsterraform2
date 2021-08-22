@@ -126,13 +126,13 @@ stages:
       displayName: run postman regression test
       inputs:
         script: |
-          newman run regression-test.postman_collection_sjg
+          newman run -x regression-test.postman_collection_sjg
         workingDirectory: 'automatedtesting/postman'
     - task: CmdLine@2
       displayName: run postman data validation test
       inputs:
         script: |
-          newman run data-validation-test.postman_collection_sjg
+          newman run -x data-validation-test.postman_collection_sjg
         workingDirectory: 'automatedtesting/postman'
   - deployment: VMDeploy
     displayName: run selenium and jmeter tests
