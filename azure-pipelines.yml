@@ -193,9 +193,23 @@ stages:
                ls -l $(Pipeline.Workspace)
                unzip -o $(Pipeline.Workspace)/jmeter/jmeter.zip
                echo "Stress Test"
-               ./apache-jmeter-5.4/bin/jmeter -n -t stress-test-plan.jmx
+               ./apache-jmeter-5.4/bin/jmeter -n -t stress-test-plan.jmx -l jmeter_log_stress_test.csv -e -o jmeter/log/stress_test_report
                echo "Endurance Test"
-               ./apache-jmeter-5.4/bin/jmeter -n -t endurance-test-plan.jmx
+               ./apache-jmeter-5.4/bin/jmeter -n -t endurance-test-plan.jmx -l jmeter_log_endurance_test.csv -e -o jmeter/log/endurance_test_report
+         - task: ArchiveFiles@2
+           inputs:
+             rootFolderOrFile: 'jmeter/log/stress_test_report'
+             includeRootFolder: false
+             archiveType: 'zip'
+             archiveFile: '$(Pipeline.Workspace)/jmeter_stress_test_report.zip'
+             replaceExistingArchive: true
+         - task: ArchiveFile@2
+           inputs:
+             rootFolderOrFile: 'jmeter/log/endurance_test_report'
+             includeRootFolder: false
+             archiveType: 'zip'
+             archiveFile: '$(Pipeline.Workspace)/jmeter_endurance_test_report.zip'
+             replaceExistingArchive: true
             
 - stage: Destroy
   jobs:
