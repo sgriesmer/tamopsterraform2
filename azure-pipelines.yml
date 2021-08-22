@@ -129,6 +129,10 @@ stages:
           newman run -x regression-test.postman_collection_sjg | tee log_postman_regression_test
           ls -l
         workingDirectory: 'automatedtesting/postman'
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'CLI'
+        testResultsFiles: 'log_postman_regression_test'
     - task: CmdLine@2
       displayName: run postman data validation test
       inputs:
@@ -136,6 +140,11 @@ stages:
           newman run -x data-validation-test.postman_collection_sjg | tee log_postman_data_validation_test
           ls -l
         workingDirectory: 'automatedtesting/postman'
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'CLI'
+        testResultsFiles: 'log_postman_data_validation_test'
+
   - deployment: VMDeploy
     displayName: run selenium and jmeter tests
     environment:
