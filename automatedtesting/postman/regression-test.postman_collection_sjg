@@ -188,8 +188,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Successful response\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"success\");",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});",
 							""
 						],
@@ -198,10 +198,10 @@
 				}
 			],
 			"request": {
-				"method": "GET",
+				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://dummy.restapiexample.com/api/v1/employees?id=8440",
+					"raw": "http://dummy.restapiexample.com/api/v1/delete/21",
 					"protocol": "http",
 					"host": [
 						"dummy",
@@ -211,13 +211,8 @@
 					"path": [
 						"api",
 						"v1",
-						"employees"
-					],
-					"query": [
-						{
-							"key": "id",
-							"value": "8440"
-						}
+						"delete",
+						"21"
 					]
 				}
 			},
