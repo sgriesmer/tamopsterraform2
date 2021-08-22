@@ -132,7 +132,7 @@ stages:
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'CLI'
-        testResultsFiles: 'log_postman_regression_test'
+        testResultsFiles: 'automatedtesting/postman/log_postman_regression_test'
     - task: CmdLine@2
       displayName: run postman data validation test
       inputs:
@@ -143,7 +143,7 @@ stages:
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'CLI'
-        testResultsFiles: 'log_postman_data_validation_test'
+        testResultsFiles: 'automatedtesting/postman/log_postman_data_validation_test'
 
   - deployment: VMDeploy
     displayName: run selenium and jmeter tests
