@@ -218,8 +218,8 @@ stages:
               script: |
                #! /bin/bash
 
-               rmdir -rf jmeter/log/stress_test_report
-               rmdir -rf jmeter/log/ensurance_test_report
+               rm -rf jmeter/log/stress_test_report
+               rm -rf jmeter/log/ensurance_test_report
             
 - stage: Destroy
   jobs:
