@@ -212,6 +212,14 @@ stages:
               archiveType: 'zip'
               archiveFile: '$(Pipeline.Workspace)/jmeter_endurance_test_report.zip'
               replaceExistingArchive: true
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+               #! /bin/bash
+
+               rmdir -rf jmeter/log/stress_test_report
+               rmdir -rf jmeter/log/ensurance_test_report
             
 - stage: Destroy
   jobs:
