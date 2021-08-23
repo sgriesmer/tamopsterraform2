@@ -152,35 +152,34 @@ stages:
       resourceType: VirtualMachine
     strategy:
       runOnce:
-       deploy:
-         steps:
-         - task: Bash@3
-           inputs:
-             targetType: 'inline'
-             script: |
-               #! /bin/bash
+        deploy:
+          steps:
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                #! /bin/bash
 
-               hostname
-               uname -a
-               sudo apt-get install software-properties-common -y
-               sudo apt-add-repository universe -y
-               sudo apt-get update -y
-               sudo apt-get install python3-pip -y
-               sudo apt-get install unzip -y
-               sudo apt-get install chromium-browser -y
-               sudo apt-get install chromium-driver -y
-               python3 -m pip install --upgrade pip
-               pip3 install selenium
-               echo "Contents of Pipeline Workspace"
-               ls -l $(Pipeline.Workspace)
-               unzip -o $(Pipeline.Workspace)/selenium/selenium.zip
-               ls -l
+                hostname
+                uname -a
+                sudo apt-get install software-properties-common -y
+                sudo apt-add-repository universe -y
+                sudo apt-get update -y
+                sudo apt-get install python3-pip -y
+                sudo apt-get install unzip -y
+                sudo apt-get install chromium-browser -y
+                sudo apt-get install chromium-driver -y
+                python3 -m pip install --upgrade pip
+                pip3 install selenium
+                echo "Contents of Pipeline Workspace"
+                ls -l $(Pipeline.Workspace)
+                unzip -o $(Pipeline.Workspace)/selenium/selenium.zip
+                ls -l
 #               python3 login.py
-        
-         - task: Bash@3
-           inputs:
-             targetType: 'inline'
-             script: |
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
                #! /bin/bash
 
                sudo apt install openjdk-11-jre-headless -y
@@ -196,20 +195,20 @@ stages:
                ./apache-jmeter-5.4/bin/jmeter -n -t stress-test-plan.jmx -l jmeter_log_stress_test.csv -e -o jmeter/log/stress_test_report
                echo "Endurance Test"
                ./apache-jmeter-5.4/bin/jmeter -n -t endurance-test-plan.jmx -l jmeter_log_endurance_test.csv -e -o jmeter/log/endurance_test_report
-         - task: ArchiveFiles@2
-           inputs:
-             rootFolderOrFile: 'jmeter/log/stress_test_report'
-             includeRootFolder: false
-             archiveType: 'zip'
-             archiveFile: '$(Pipeline.Workspace)/jmeter_stress_test_report.zip'
-             replaceExistingArchive: true
-         - task: ArchiveFile@2
-           inputs:
-             rootFolderOrFile: 'jmeter/log/endurance_test_report'
-             includeRootFolder: false
-             archiveType: 'zip'
-             archiveFile: '$(Pipeline.Workspace)/jmeter_endurance_test_report.zip'
-             replaceExistingArchive: true
+          - task: ArchiveFiles@2
+            inputs:
+              rootFolderOrFile: 'jmeter/log/stress_test_report'
+              includeRootFolder: false
+              archiveType: 'zip'
+              archiveFile: '$(Pipeline.Workspace)/jmeter_stress_test_report.zip'
+              replaceExistingArchive: true
+          - task: ArchiveFiles@2
+            inputs:
+              rootFolderOrFile: 'jmeter/log/endurance_test_report'
+              includeRootFolder: false
+              archiveType: 'zip'
+              archiveFile: '$(Pipeline.Workspace)/jmeter_endurance_test_report.zip'
+              replaceExistingArchive: true
             
 - stage: Destroy
   jobs:
