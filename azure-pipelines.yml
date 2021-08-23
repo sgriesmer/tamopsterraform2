@@ -182,6 +182,7 @@ stages:
               script: |
                #! /bin/bash
 
+               sudo apt-get -y install zip
                sudo apt install openjdk-11-jre-headless -y
                wget http://apache.volia.net//jmeter/binaries/apache-jmeter-5.4.tgz
                tar -xf apache-jmeter-5.4.tgz
@@ -192,6 +193,7 @@ stages:
                ls -l $(Pipeline.Workspace)
                unzip -o $(Pipeline.Workspace)/jmeter/jmeter.zip
                mkdir -p jmeter/log
+              
                echo "Stress Test"
                ./apache-jmeter-5.4/bin/jmeter -n -t stress-test-plan.jmx -l jmeter_log_stress_test.csv -e -o jmeter/log/stress_test_report
                echo "Endurance Test"
