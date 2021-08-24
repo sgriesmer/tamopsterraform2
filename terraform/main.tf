@@ -80,11 +80,11 @@ resource "azurerm_linux_virtual_machine" "test" {
   location            = "${var.location}"
   resource_group_name = "${var.resource_group}"
   size                = "Standard_B1ms"
-  admin_username      = "azureuser"
+  admin_username      = "adminsjg"
   disable_password_authentication = true
   network_interface_ids = [azurerm_network_interface.test.id]
   admin_ssh_key {
-    username   = "azureuser"
+    username   = "adminsjg"
     public_key = file("./az_sjg.pub")
   }
   os_disk {
