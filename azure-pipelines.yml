@@ -178,6 +178,7 @@ stages:
                 ls -l
                 sudo python3 select.py > selenium_ui_test.txt
                 cat selenium_ui_test.txt
+                cp selenium_ui_test.txt $(Pipeline.Workspace)/selenium_ui_test.txt
           - task: PublishPipelineArtifact@1
             inputs:
               targetPath: '$(Pipeline.Workspace)/selenium_ui_test.txt'
