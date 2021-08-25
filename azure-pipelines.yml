@@ -176,7 +176,13 @@ stages:
                 ls -l $(Pipeline.Workspace)
                 unzip -o $(Pipeline.Workspace)/selenium/selenium.zip
                 ls -l
-                sudo python3 select.py
+                sudo python3 select.py > selenium_ui_test.txt
+                cat selenium_ui_test.txt
+          - task: PublishPipelineArtifact@1
+            inputs:
+              targetPath: '$(Pipeline.Workspace)/selenium_ui_test.txt'
+              artifact: 'selenium_ui_test'
+              publishLocation: 'pipeline'
           - task: Bash@3
             inputs:
               targetType: 'inline'
