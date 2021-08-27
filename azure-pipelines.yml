@@ -15,14 +15,17 @@ stages:
       name: Hosted Ubuntu 1604
     steps:
     - task: InstallSSHKey@0
+      displayName: Install SSH Key
       inputs:
         knownHostsEntry: 'known_hosts'
         sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDM+zJHMM8CGFxAw65g0W0/gg1bkCtAQgREVtXV8lclanDVSgDDSfmDKXtPeL+ZvOx8j/AHudKNtGvRnucDb0qatMdU/HRGiw66KhGsNe1jqsHIVD8T9qOBvMGKpQwSS9GOoAI0BVGdAxDuxOlnp6E7MbB5d7TVcTapAgberY0PxQ38gpQdA43kStR14E13icbpCTbLNlqXXOBQouS56BTwW21oYCrKRl98q0auvdBzWww/xFGms7jorzjOGVqNj8fawA21G6X1zhLGeE5yuMTZYllucHy97Fq7Ep7ADpWK1EG96/a3wVikc0byW/YZXK1bZqa+ZF7qPN4Yv8uxIob9 stephen@cc-0f53-c91c10a4-7494f6474d-p9tgb'
         sshKeySecureFile: 'az_sjg'
     - task: TerraformInstaller@0
+      displayName: Install Terraform
       inputs:
         terraformVersion: '1.0.2'
     - task: TerraformTaskV2@2
+      displayName: Initialize Terraform
       env:
         ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
         ARM_CLIENT_ID: $(ARM_CLIENT_ID)
@@ -38,6 +41,7 @@ stages:
         backendAzureRmKey: 'terraform.tfstate'
         workingDirectory: 'terraform'
     - task: TerraformTaskV2@2
+      displayName: Check Terraform Plan
       env:
         ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
         ARM_CLIENT_ID: $(ARM_CLIENT_ID)
@@ -49,6 +53,7 @@ stages:
         environmentServiceNameAzureRM: 'tamopstf'
         workingDirectory: 'terraform'
     - task: TerraformTaskV2@2
+      displayName: Apply Terraform Plan
       env:
         ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
         ARM_CLIENT_ID: $(ARM_CLIENT_ID)
@@ -60,6 +65,7 @@ stages:
         environmentServiceNameAzureRM: 'tamopstf'
         workingDirectory: 'terraform'
     - task: AzureRmWebAppDeployment@4
+      displayName: Deploy WebApp fakerestapi
       inputs:
         ConnectionType: 'AzureRM'
         azureSubscription: 'tamopstf'
@@ -67,6 +73,7 @@ stages:
         WebAppName: 'sjg-udacity-newapp7-AppService'
         packageForLinux: '$(System.DefaultWorkingDirectory)/fakerestapi.zip'
     - task: ArchiveFiles@2
+      displayName: Archive Selenium Tests from Github
       inputs:
         rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/selenium'
         includeRootFolder: false
@@ -74,11 +81,13 @@ stages:
         archiveFile: '$(Pipeline.Workspace)/selenium.zip'
         replaceExistingArchive: true
     - task: PublishPipelineArtifact@1
+      displayName: Publish Selenium Tests as Pipeline Artifacts
       inputs:
         targetPath: '$(Pipeline.Workspace)/selenium.zip'
         artifact: 'selenium'
         publishLocation: 'pipeline'
     - task: ArchiveFiles@2
+      displayName: Archive Jmeter Tests from Github
       inputs:
         rootFolderOrFile: '$(System.DefaultWorkingDirectory)/automatedtesting/jmeter'
         includeRootFolder: false
@@ -86,12 +95,14 @@ stages:
         archiveFile: '$(Pipeline.Workspace)/jmeter.zip'
         replaceExistingArchive: true
     - task: PublishPipelineArtifact@1
+      displayName: Publish Jmeter Tests as Pipeline Artifacts
       inputs:
         targetPath: '$(Pipeline.Workspace)/jmeter.zip'
         artifact: 'jmeter'
         publishLocation: 'pipeline'
 
-- stage: deploy
+- stage: Deploy
+  displayName: Deploy VM in TEST Environment
   jobs:
   - deployment: VMDeploy
     displayName: VM Deploy
@@ -118,35 +129,37 @@ stages:
         sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDM+zJHMM8CGFxAw65g0W0/gg1bkCtAQgREVtXV8lclanDVSgDDSfmDKXtPeL+ZvOx8j/AHudKNtGvRnucDb0qatMdU/HRGiw66KhGsNe1jqsHIVD8T9qOBvMGKpQwSS9GOoAI0BVGdAxDuxOlnp6E7MbB5d7TVcTapAgberY0PxQ38gpQdA43kStR14E13icbpCTbLNlqXXOBQouS56BTwW21oYCrKRl98q0auvdBzWww/xFGms7jorzjOGVqNj8fawA21G6X1zhLGeE5yuMTZYllucHy97Fq7Ep7ADpWK1EG96/a3wVikc0byW/YZXK1bZqa+ZF7qPN4Yv8uxIob9 stephen@cc-0f53-c91c10a4-7494f6474d-p9tgb'
         sshKeySecureFile: 'az_sjg'
     - task: CmdLine@2
-      displayName: install newman
+      displayName: Install Newman
       inputs:
         script: |
           sudo npm install -g newman
     - task: CmdLine@2
-      displayName: run postman regression test
+      displayName: Execute postman Regression Test
       inputs:
         script: |
           newman run -x regression-test.postman_collection_sjg --reporters cli,junit --reporter-junit-export log_postman_regression_test.xml
           ls -l
         workingDirectory: 'automatedtesting/postman'
     - task: PublishTestResults@2
+      displayName: Publish postman Regression Test Results
       inputs:
         testResultsFormat: 'JUnit'
         testResultsFiles: 'automatedtesting/postman/log_postman_regression_test.xml'
     - task: CmdLine@2
-      displayName: run postman data validation test
+      displayName: Execute postman Data Validation Test
       inputs:
         script: |
           newman run -x data-validation-test.postman_collection_sjg --reporters cli,junit --reporter-junit-export log_postman_data_validation_test.xml
           ls -l
         workingDirectory: 'automatedtesting/postman'
     - task: PublishTestResults@2
+      displayName: Publish postman Data Validation Test Results
       inputs:
         testResultsFormat: 'Junit'
         testResultsFiles: 'automatedtesting/postman/log_postman_data_validation_test.xml'
 
   - deployment: VMDeploy
-    displayName: run selenium and jmeter tests
+    displayName: Install selenium and jmeter; Run UI and Performance Tests
     environment:
       name: "TEST"
       resourceType: VirtualMachine
@@ -155,6 +168,7 @@ stages:
         deploy:
           steps:
           - task: Bash@3
+            displayName: Install Selenium and Test Suite
             inputs:
               targetType: 'inline'
               script: |
@@ -175,16 +189,25 @@ stages:
                 echo "Contents of Pipeline Workspace"
                 ls -l $(Pipeline.Workspace)
                 unzip -o $(Pipeline.Workspace)/selenium/selenium.zip
+          - task: Bash@3
+            displayName: Run Selenium Tests
+            inputs:
+              targetType: 'inline'
+              script: |
+                #! /bin/bash
+
                 ls -l
                 sudo python3 select.py 2> selenium_ui_test.txt
                 cat selenium_ui_test.txt
                 cp selenium_ui_test.txt $(Pipeline.Workspace)/selenium_ui_test.txt
           - task: PublishPipelineArtifact@1
+            displayName: Publish Selenium Test Results
             inputs:
               targetPath: '$(Pipeline.Workspace)/selenium_ui_test.txt'
               artifact: 'selenium_ui_test'
               publishLocation: 'pipeline'
           - task: Bash@3
+            displayName: Install Jmeter and Test Suite
             inputs:
               targetType: 'inline'
               script: |
@@ -201,7 +224,13 @@ stages:
                ls -l $(Pipeline.Workspace)
                unzip -o $(Pipeline.Workspace)/jmeter/jmeter.zip
                mkdir -p jmeter/log
-              
+          - task: Bash@3
+            displayName: Run Jmeter Stress and Endurance Tests
+            inputs:
+              targetType: 'inline'
+              script: |
+               #! /bin/bash
+
                echo "Stress Test"
                ./apache-jmeter-5.4/bin/jmeter -n -t stress-test-plan.jmx -l jmeter_log_stress_test.csv -e -o jmeter/log/stress_test_report
                echo "Stress Test Log"
@@ -213,6 +242,7 @@ stages:
                cat jmeter_log_endurance_test.csv
                echo ""
           - task: ArchiveFiles@2
+            displayName: Archive Jmeter Stress Test Report
             inputs:
               rootFolderOrFile: 'jmeter/log/stress_test_report'
               includeRootFolder: false
@@ -220,11 +250,13 @@ stages:
               archiveFile: '$(Pipeline.Workspace)/jmeter_stress_test_report.zip'
               replaceExistingArchive: true
           - task: PublishPipelineArtifact@1
+            displayName: Publish Jmeter Stress Test Report
             inputs:
               targetPath: '$(Pipeline.Workspace)/jmeter_stress_test_report.zip'
               artifact: 'jmeter_stress_test_report'
               publishLocation: 'pipeline'
           - task: ArchiveFiles@2
+            displayName: Archive Jmeter Endurance Test Report
             inputs:
               rootFolderOrFile: 'jmeter/log/endurance_test_report'
               includeRootFolder: false
@@ -232,11 +264,13 @@ stages:
               archiveFile: '$(Pipeline.Workspace)/jmeter_endurance_test_report.zip'
               replaceExistingArchive: true
           - task: PublishPipelineArtifact@1
+            displayName: Publish Jmeter Endurance Test Report
             inputs:
               targetPath: '$(Pipeline.Workspace)/jmeter_endurance_test_report.zip'
               artifact: 'jmeter_endurance_test_report'
               publishLocation: 'pipeline'
           - task: Bash@3
+            displayName: Clean Up Test Reports
             inputs:
               targetType: 'inline'
               script: |
@@ -246,6 +280,7 @@ stages:
                rm -rf jmeter/log/ensurance_test_report
             
 - stage: Destroy
+  displayName: Destroy Terraform Infrastructure
   jobs:
   - job: Destroy
     pool:
