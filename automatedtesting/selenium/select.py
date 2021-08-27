@@ -24,7 +24,9 @@ driver.find_element_by_css_selector("input[id='password']").send_keys(password)
 #driver.find_element_by_css_selector("button[id='login-button']").click()
 driver.find_element_by_css_selector('input[type="submit"]').click()
 
-logging.info (driver.current_url)
+logging.info ('User-name: %s', user)
+
+logging.info ('Current URL: %s', driver.current_url)
 
 backpack = driver.find_element_by_css_selector("button[id='add-to-cart-sauce-labs-backpack']").click()
 
@@ -58,7 +60,7 @@ logging.info ("selected shopping cart")
 
 #driver.save_screenshot('shoppingcart.png')
 
-logging.info (driver.current_url)
+logging.info ('Current URL: %s',driver.current_url)
 
 xbackpack = driver.find_element_by_css_selector("button[id='remove-sauce-labs-backpack']").click()
 
