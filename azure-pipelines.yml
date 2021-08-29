@@ -204,6 +204,7 @@ stages:
                 sudo mkdir -p /var/log/selenium
                 sudo chmod 664 /var/log/selenium
                 sudo cp selenium_ui_test.txt /var/log/selenium
+                sudo chmod 664 /var/log/selenium/selenium_ui_test.txt
 
           - task: PublishPipelineArtifact@1
             displayName: Publish Selenium Test Results
