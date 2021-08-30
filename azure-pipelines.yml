@@ -209,7 +209,7 @@ stages:
           - task: PublishPipelineArtifact@1
             displayName: Publish Selenium Test Results
             inputs:
-              targetPath: '$(Pipeline.Workspace)/selenium_ui_test.txt'
+              targetPath: '$(Pipeline.Workspace)/selenium_ui_test.log'
               artifact: 'selenium_ui_test'
               publishLocation: 'pipeline'
           - task: Bash@3
