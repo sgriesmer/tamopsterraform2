@@ -198,7 +198,6 @@ stages:
 
                 ls -l
                 sudo python3 select.py 2>&1 | sudo tee -a selenium_ui_test.log
-                cat selenium_ui_test.log
                 cp selenium_ui_test.log $(Pipeline.Workspace)/selenium_ui_test.log
                 # store log in public directory for LAW pickup
                 sudo mkdir -p /var/log/selenium
