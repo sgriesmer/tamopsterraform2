@@ -197,13 +197,10 @@ stages:
                 #! /bin/bash
 
                 ls -l
-                sudo python3 select.py 2>&1 | sudo tee -a selenium_ui_test.log
-                cp selenium_ui_test.log $(Pipeline.Workspace)/selenium_ui_test.log
-                # store log in public directory for LAW pickup
                 sudo mkdir -p /var/log/selenium
                 sudo chmod -R ugo+rx /var/log/selenium
-                sudo cp selenium_ui_test.log /var/log/selenium
-                sudo chmod 666 /var/log/selenium/selenium_ui_test.log
+                sudo python3 select.py 2>&1 | sudo tee -a /var/log/selenium_ui_test.log
+                cp /var/log/selenium_ui_test.log $(Pipeline.Workspace)/selenium_ui_test.log
 
           - task: PublishPipelineArtifact@1
             displayName: Publish Selenium Test Results
