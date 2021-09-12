@@ -116,7 +116,7 @@ stages:
       runOnce:
         deploy:
           steps:
-          - script: mkdir test; hostname; uname -a
+          - script: hostname; uname -a
 
 - stage: Testing
   jobs:
@@ -175,8 +175,6 @@ stages:
               script: |
                 #! /bin/bash
 
-                hostname
-                uname -a
                 sudo apt-get install software-properties-common -y
                 sudo apt-add-repository universe -y
                 sudo apt-get update -y
@@ -187,8 +185,6 @@ stages:
                 python3 -m pip install --upgrade pip
                 pip3 install selenium
                 /usr/bin/chromedriver --version
-                echo "Contents of Pipeline Workspace"
-                ls -l $(Pipeline.Workspace)
                 unzip -o $(Pipeline.Workspace)/selenium/selenium.zip
           - task: Bash@3
             displayName: Run Selenium Tests
@@ -197,7 +193,6 @@ stages:
               script: |
                 #! /bin/bash
 
-                ls -l
                 sudo mkdir -p /var/log/selenium
                 sudo chmod -R ugo+rx /var/log/selenium
                 sudo python3 select.py 2>&1 | sudo tee -a /var/log/selenium_ui_test.log
@@ -221,10 +216,6 @@ stages:
                wget http://apache.volia.net//jmeter/binaries/apache-jmeter-5.4.tgz
                tar -xf apache-jmeter-5.4.tgz
                ./apache-jmeter-5.4/bin/jmeter -v
-               echo "Working Directory:"
-               ls -l $(System.DefaultWorkingDirectory)
-               echo "Pipeline Workspace:"
-               ls -l $(Pipeline.Workspace)
                unzip -o $(Pipeline.Workspace)/jmeter/jmeter.zip
                mkdir -p jmeter/log
           - task: Bash@3
