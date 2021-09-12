@@ -98,13 +98,12 @@ Two types of jmeter tests were performed: (1) stress testing, and (2) endurance 
 
 The jmeter testing results are summarized in HTML reports that are downloadable from artifacts of the Azure DevOps Pipeline.  The screenshots below show these test results.
 
-![html report for jmeter endurance test](/screenshots/html-report-for-jmeter-endurance-test.png")
+![html report for jmeter endurance test](/screenshots/html-report-for-jmeter-endurance-test.png)
 
-![html report for jmeter stress test] (/screenshots/html-report-for-jmeter-stress-test.png")
+![html report for jmeter stress test] (/screenshots/html-report-for-jmeter-stress-test.png)
 
 ## Triggering an Alert during Jmeter Stress Testing
 
 During the jmeter stress testing, the alert on CPU time greater than 5 seconds is triggered and sent via email.  The screenshot below shows the alert.
 
 ![email showing alert] (/screenshots/email-showing-alert.png)
-
