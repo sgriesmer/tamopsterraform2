@@ -13,7 +13,7 @@ The infrastructure is created by Terraform scripts, triggered by an Azure DevOps
 
 The following screenshot shows a successful automated run of the Terraform scripts in the Azure DevOps Pipeline:
 
-![Terraform apply in pipeline](/screenshots/"terraform apply in pipeline.png")
+![Terraform apply in pipeline](/screenshots/terraform-apply-in-pipeline.png)
 
 
 ## Deploying the Virtual Machine to a Test Environment
@@ -50,7 +50,7 @@ To specify the alert rule details, provide the Alert rule name, Description, and
 
 In the Azure Portal, to add the importing of the selenium test log, go to Log Analytics > <your workspace> > Custom Logs.  Add the name of the custom log and the log file path name.  The screenshot below shows the custom log setup.
 
-![law custom log setup](/screenshots/"law custom log setup.png")
+![law custom log setup](/screenshots/law-custom-log-setup.png)
 
 Proceed to the Azure DevOps Pipeline to run stage 2, Deploy VM to the test environment.  Rerun failed jobs to deploy the VM to the TEST environment and begin testing.
 
@@ -60,17 +60,17 @@ The tests will be run automatically from test scripts.
 
 Two types of Postman tests are run: (1) a regression test, which tests the API, and (2) a data validation test, which tests the data returned by the API.  The target of the testing was APIs supplied by the website, http://dummy.restapiexample.com/.  Screenshots for these tests are below.
 
-![Postman regression test](/screenshots/"postman regression test.png")
+![Postman regression test](/screenshots/postman-regression-test.png)
 
-![Postman data validation test](/screenshots/"postman data validation test.png")
+![Postman data validation test](/screenshots/postman-data-validation-test.png)
 
 ### Postman test results
 
 The Postman tests were also published as artifacts in Azure DevOps.  To see the test results in Azure DevOps, proceed to Test Plans > Runs.  Click on results for regression test and data validation tests.  Screenshots are shown below.
 
-![Postman regression test results](/screenshots/"postman regression test results.png")
+![Postman regression test results](/screenshots/postman-regression-test-results.png)
 
-![Postman regression test](/screenshots/"postman data validation test results.png")
+![Postman regression test](/screenshots/postman-data-validation-test-results.png)
 
 ### Selenium testing
 
@@ -78,33 +78,33 @@ Selenium tests the user interface of a service.  In this case, the target test s
 
 Selenium testing in the Azure DevOps Pipeline is shown in the screenshot below.
 
-![Selenium testing in pipeline](/screenshots/"selenium testing in pipeline.png")
+![Selenium testing in pipeline](/screenshots/selenium-testing-in-pipeline.png)
 
 ### Selenium test results
 
 The logs were published to the Log Analytics Workspace created earlier.  The screenshot below shows the published results in the workspace.
 
-![Selenium testing in pipeline](/screenshots/"selenium testing in pipeline.png")
+![Selenium testing in pipeline](/screenshots/selenium-testing-in-pipeline.png)
 
 ### Jmeter testing
 
 Two types of jmeter tests were performed: (1) stress testing, and (2) endurance testing.  Jmeter testing in the Azure DevOps Pipeline is schown in the screenshots below.
 
-![jmeter endurance test in pipeline](/screenshots/"jmeter endurance test in pipeline.png")
+![jmeter endurance test in pipeline](/screenshots/jmeter-endurance-test-in-pipeline.png)
 
-![jmeter stress test in pipeline](/screenshots/"jmeter stress test in pipeline.png")
+![jmeter stress test in pipeline](/screenshots/jmeter-stress-test-in-pipeline.png")
 
 ### Jmeter test results
 
 The jmeter testing results are summarized in HTML reports that are downloadable from artifacts of the Azure DevOps Pipeline.  The screenshots below show these test results.
 
-![html report for jmeter endurance test](/screenshots/"html report for jmeter endurance test.png")
+![html report for jmeter endurance test](/screenshots/html-report-for-jmeter-endurance-test.png")
 
-![html report for jmeter stress test] (/screenshots/"html report for jmeter stress test.png")
+![html report for jmeter stress test] (/screenshots/html-report-for-jmeter-stress-test.png")
 
 ## Triggering an Alert during Jmeter Stress Testing
 
 During the jmeter stress testing, the alert on CPU time greater than 5 seconds is triggered and sent via email.  The screenshot below shows the alert.
 
-![email showing alert] (/screenshots/"email showing alert.png")
+![email showing alert] (/screenshots/email-showing-alert.png)
 
