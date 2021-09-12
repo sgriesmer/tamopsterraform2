@@ -34,9 +34,9 @@ Next, log into the virtual machine from which logs will be gathered with the fol
 
         ssh -i <ssh-key> azureuser@<Public IP of VM>
 
-Next, in the Azure Portal, go to Log Analytics > <workspace created> > Agents Management > Linux servers to copy the script to install the OMS monitoring agent on the virtual machine.  Run the script on the VM.
+Next, in the Azure Portal, go to Log Analytics > \<workspace created\> > Agents Management > Linux servers to copy the script to install the OMS monitoring agent on the virtual machine.  Run the script on the VM.
 
-After the script is run, ensure that the virtual machine is connected to your workspace by going to Log Analytics > Virtual Machines > <your VM> > Connect.
+After the script is run, ensure that the virtual machine is connected to your workspace by going to Log Analytics > Virtual Machines > \<your VM\> > Connect.
 
 ## Create an email alert for the condition that the CPU Time on the App Service deployed earlier exceeds 5 seconds
 
@@ -48,7 +48,7 @@ To specify the alert rule details, provide the Alert rule name, Description, and
 
 ## Linking custom log file to Log Analytics Workspace
 
-In the Azure Portal, to add the importing of the selenium test log, go to Log Analytics > <your workspace> > Custom Logs.  Add the name of the custom log and the log file path name.  The screenshot below shows the custom log setup.
+In the Azure Portal, to add the importing of the selenium test log, go to Log Analytics > \<your workspace\> > Custom Logs.  Add the name of the custom log and the log file path name.  The screenshot below shows the custom log setup.
 
 ![law custom log setup](/screenshots/law-custom-log-setup.png)
 
