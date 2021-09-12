@@ -100,10 +100,10 @@ The jmeter testing results are summarized in HTML reports that are downloadable 
 
 ![html report for jmeter endurance test](/screenshots/html-report-for-jmeter-endurance-test.png)
 
-![html report for jmeter stress test] (/screenshots/html-report-for-jmeter-stress-test.png)
+![html report for jmeter stress test](/screenshots/html-report-for-jmeter-stress-test.png)
 
 ## Triggering an Alert during Jmeter Stress Testing
 
 During the jmeter stress testing, the alert on CPU time greater than 5 seconds is triggered and sent via email.  The screenshot below shows the alert.
 
-![email showing alert] (/screenshots/email-showing-alert.png)
+![email showing alert](/screenshots/email-showing-alert.png)
