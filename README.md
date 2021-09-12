@@ -92,7 +92,7 @@ Two types of jmeter tests were performed: (1) stress testing, and (2) endurance 
 
 ![jmeter endurance test in pipeline](/screenshots/jmeter-endurance-test-in-pipeline.png)
 
-![jmeter stress test in pipeline](/screenshots/jmeter-stress-test-in-pipeline.png")
+![jmeter stress test in pipeline](/screenshots/jmeter-stress-test-in-pipeline.png)
 
 ### Jmeter test results
 
