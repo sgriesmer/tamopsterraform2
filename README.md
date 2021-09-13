@@ -32,7 +32,7 @@ To deploy the Linux virtual machine to the TEST environment, the Azure DevOps En
 
 ### Create a Log Analytics Workspace
 
-To create a Log Analytics Workspace in your Azure subscription, download the template json file () for the creation and run the following command:
+To create a Log Analytics Workspace in your Azure subscription, download the template json file (https://docs.microsoft.com/en-us/azure/azure-monitor/logs/resource-manager-workspace#create-a-log-analytics-workspace) for the creation and run the following command:
 
 	az deployment group create --resource-group <resource group) --name <law name> --template-file <json file>
 
@@ -44,7 +44,7 @@ Next, log into the virtual machine from which logs will be gathered with the fol
 
         ssh -i <ssh-key> azureuser@<Public IP of VM>
 
-Next, in the Azure Portal, go to Log Analytics > \<workspace created\> > Agents Management > Linux servers to copy the script to install the OMS monitoring agent on the virtual machine.  Run the script on the VM.
+In the Azure Portal, go to Log Analytics > \<workspace created\> > Agents Management > Linux servers to copy the script to install the OMS monitoring agent on the virtual machine.  Run the script on the VM.
 
 After the script is run, ensure that the virtual machine is connected to your workspace by going to Log Analytics > Virtual Machines > \<your VM\> > Connect.
 
